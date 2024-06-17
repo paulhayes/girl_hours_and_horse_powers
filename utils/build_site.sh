@@ -4,11 +4,10 @@
 # Support your local low-tech magazine: https://solar.lowtechmagazine.com/donate/
 
 now=`date`
-baseURL="" #the URL of the website e.g. htttps://solar.lowtechmagazine.com/
-contentDir="" #the directory where your HUGO articles are e.g. /path/to/repo/solar_v2/content/
-repoDir="" #the full path to the repository
-outputDir="" # the directory where you export the site to.
-
+source "${BASH_SOURCE%/*}/params.sh"
+set -e
+echo "${repoDir}/.env/bin/activate"
+source "${repoDir}/.env/bin/activate"
 
 while getopts f flag
 do
@@ -34,16 +33,16 @@ else
         cd $repoDir
 
         echo "Dithering new images"
-        /usr/bin/python3 utils/dither_images.py -d $contentDir --colorize
+        python3 utils/dither_images.py -d $contentDir --colorize
 
         echo "Generating site"
         hugo -b $baseURL --destination $outputDir
 
         echo "Calculating page sizes"
-        /usr/bin/python3 utils/calculate_size.py --directory $outputDir --baseURL $baseURL
+       	python3 utils/calculate_size.py --directory $outputDir --baseURL $baseURL
 
         echo "Removing original media from" $outputDir
-        /usr/bin/python3 utils/clean_output.py --directory $outputDir
+       	python3 utils/clean_output.py --directory $outputDir
 
         after=`date`
         echo "Site regeneration started $now"
