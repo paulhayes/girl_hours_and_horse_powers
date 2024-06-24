@@ -1,6 +1,6 @@
 // console.log('script loaded');
 
-let url = "/api/stats.json";  
+let url = "/rpimonitor/dynamic.json";  
 let data;
 let solar_stats = [];
 let battery_stats = [];
@@ -13,7 +13,7 @@ async function loadJSON() {
   const data = await response.json();
   setupBatteryMeter(data);
   populateDashboard(data);
-  populateForecast(data);
+  //populateForecast(data);
 
   if (window.location.href.indexOf('/power/') > -1) {
       //load general stats on power page
@@ -24,7 +24,7 @@ async function loadJSON() {
 
 function setupBatteryMeter(data) {
     //setup visible battery level
-    let level = parseInt(data.charge);
+    let level = parseInt(data.battery_meter);
     let indicator = document.getElementById('battery_data');
     document.getElementById('battery').style.height = (100-level) + '%';
     // indicator.style.top = 100 - parseInt(level) + "vh";
@@ -53,15 +53,15 @@ function populateData(data) {
     let load = ((data.load_15 / 2) * 100).toFixed(2) + '%';
 
     let general_stats = [
-        ["Local time", data.local_time],
+        ["Local time", data.localtime],
         ["Uptime", data.uptime],
-        ["Power usage", data.W],
-        ["Current draw", data.A],
-        ["Voltage", data.V],
-        ["CPU temperature", data.temperature + "°C"],
+        //["Power usage", data.W],
+        //["Current draw", data.A],
+        ["Voltage", data.battery_voltage],
+        ["CPU temperature", data.soc_temp + "°C"],
         ["CPU load average *", load],
-        ["Solar panel active", data.charging],
-        ["Battery capacity", data.charge + "%"]
+        //["Solar panel active", data.charging],
+        ["Battery capacity", data.battery_meter + "%"]
     ];
 
     let dl = document.getElementById('server');
