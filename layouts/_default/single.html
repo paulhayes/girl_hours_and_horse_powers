@@ -6,11 +6,8 @@
 		<section id="content" class="article">
 			<header class="entry-header">
 				<h1 class="entry-title">
-				{{ .Title }}</h1>
-
-				<p class="summary">
-					{{ .Summary }}
-				</p>
+				{{ .Title }}
+				</h1>				
 				<div class="metadata">
 					{{/*  disable metadata author for about category  */}}
 					{{ if not (in .Params.categories "About") }}
