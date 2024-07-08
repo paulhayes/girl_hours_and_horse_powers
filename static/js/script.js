@@ -105,9 +105,11 @@ function populateDashboard(data) {
       bat_text = "charging";
     }
 
+    let t=data.localtime;
+
     let footer_data = [
-      ['Location', 'Barcelona'],
-      ['Time', data.local_time],
+      ['Location', 'Lisbon'],
+      ['Time', `${t[2]}/${t[1]}/${t[0]} ${t[3]}:${t[4]}:${t[5]}`],
       ['Battery status', bat_text],
       ['Power used', data.W],
       ['Uptime', data.uptime]
