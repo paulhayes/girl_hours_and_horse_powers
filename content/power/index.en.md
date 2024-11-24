@@ -1,11 +1,6 @@
 ---
 title: "Power"
-date: ""
 slug: "power"
-lang: "en"
-authors: ["" ]
-categories: [""]
-tags: []
 featured_image: "solar-powered-server-weather-2.png"
 ---
 

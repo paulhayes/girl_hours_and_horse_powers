@@ -1,6 +1,7 @@
 // console.log('script loaded');
 
 let url = "/rpimonitor/dynamic.json";  
+let weather = "https://goweather.herokuapp.com/weather/Lisbon";
 let data;
 let solar_stats = [];
 let battery_stats = [];
@@ -10,10 +11,17 @@ loadJSON();
 
 async function loadJSON() {
   const response = await fetch(url);
-  const data = await response.json();
-  setupBatteryMeter(data);
-  populateDashboard(data);
-  //populateForecast(data);
+  try{
+    const data = await response.json();
+    setupBatteryMeter(data);
+    populateDashboard(data);
+  }
+  catch(e){
+    console.log("failed to fetch data");
+  }
+  const weatherResponse = await fetch(weather);
+  const weatherData = await weatherResponse.json();
+  populateForecast(weatherData);
 
   if (window.location.href.indexOf('/power/') > -1) {
       //load general stats on power page
@@ -75,19 +83,24 @@ function populateForecast(data) {
     const weather_days = ["today", "tomorrow", "day after tomorrow"];
     let forecast = "";
 
-    for (let i = 0; i < weather_data.length; i++) {
+    //for (let i = 0; i < weather_data.length; i++) {
         
-        let icon_name = weather_data[i]
-        let text = data[icon_name].replace(/-/g, " ");
-        let weather_icon;
-        //use cloud icon for all overcast weather
-        if (weather_ignore.includes(data[icon_name])) {
-            weather_icon = "cloudy";
-        } else {
-            weather_icon = data[icon_name];
-        }
-        forecast += '<span class="weather_day" id="' + weather_days[i] + '" title="' + text + '">' + weather_days[i] + '</span><span class="weather_icon ' + weather_icon + '"> </span><span class="weather_text"> ' + text + '</span>';
-    }
+        // let icon_name = weather_data[i]
+        // let text = data[icon_name].replace(/-/g, " ");
+        // let weather_icon;
+        // //use cloud icon for all overcast weather
+        // if (weather_ignore.includes(data[icon_name])) {
+        //     weather_icon = "cloudy";
+        // } else {
+        //     weather_icon = data[icon_name];
+        // }
+        // forecast += '<span class="weather_day" id="' + weather_days[i] + '" title="' + text + '">' + weather_days[i] + '</span><span class="weather_icon ' + weather_icon + '"> </span><span class="weather_text"> ' + text + '</span>';
+    //}
+    forecast += `<span class="weather_day">${data.description} ${data.temperature}</span>`;
+    // for(let i=0;i<data.forecast.length;i++){
+    //     let entry = data.forecast[i];
+    //     forecast += `<span class="weather_data">${entry.temperature}</span>`;
+    // }
 
     let weatherinfo = document.querySelectorAll('.forecast');
 

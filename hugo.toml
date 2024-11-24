@@ -49,7 +49,6 @@ enableInlineShortcodes = true
 
 [params]
 	author = "Anna Bertmark (she/her), PhD candidate & Design Researcher"
-  newsletter = ""
   description = "This is a solar-powered website, which means it sometimes goes offline"
 
 [menu]
@@ -60,70 +59,16 @@ enableInlineShortcodes = true
   weight = 1
 
 [[menu.main]]
-  identifier = "offline"
-  name = "Offline Reading"
-  url = "/offline-reading/"
-  weight = 5
-
-[[menu.main]]
   identifier = "archives"
   name = "Archive"
   url = "/archives/"
   weight = 6
-
-[[menu.main]]
-  identifier = "donate"
-  name = "Donate"
-  url = "/donate/"
-  weight = 7
-
-[[menu.main]]
-  identifier = "ntm"
-  name = "NTM"
-  url = "https://www.notechmagazine.com/"
-  weight = 8
 
 defaultContentLanguage = 'en'
 [languages]
 	[languages.en]
     languageName = 'English'
 	  weight = 1
-
-	[languages.fr]
-    [languages.fr.params]
-    languageName = 'Français'
-    description = ''
-	  weight = 2
-	[languages.de]
-    [languages.de.params]
-    languageName = 'Deutsch'
-    weight = 3
-  [languages.nl]
-    languageName = 'Nederlands'
-    weight = 4
-  [languages.es]
-    languageName = 'Español'
-    weight = 5
-  [languages.it]
-    languageName = 'Italiano'
-    weight = 6
-  [languages.pt]
-    languageName = 'Português'
-    weight = 7
-  [languages.pl]
-    languageName = 'Polski'
-    weight = 8
-  [languages.ar]
-    languageName = 'العربية'
-    languagedirection = 'rtl'
-    weight = 9
-  [languages.vn]
-    languageName = 'Tiếng Việt'
-    weight = 10
-  [languages.ko]
-    languageName = '한국어'
-    weight = 11
-
 
 
 [taxonomies]
